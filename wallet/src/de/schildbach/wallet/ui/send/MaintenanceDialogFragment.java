@@ -20,12 +20,12 @@ package de.schildbach.wallet.ui.send;
 import java.util.Collections;
 import java.util.List;
 
-import org.bitcoinj.core.Coin;
-import org.bitcoinj.core.Transaction;
-import org.bitcoinj.crypto.KeyCrypterException;
-import org.bitcoinj.utils.MonetaryFormat;
-import org.bitcoinj.wallet.DeterministicUpgradeRequiresPassword;
-import org.bitcoinj.wallet.Wallet;
+import org.mincoinj.core.Coin;
+import org.mincoinj.core.Transaction;
+import org.mincoinj.crypto.KeyCrypterException;
+import org.mincoinj.utils.MonetaryFormat;
+import org.mincoinj.wallet.DeterministicUpgradeRequiresPassword;
+import org.mincoinj.wallet.Wallet;
 import org.bouncycastle.crypto.params.KeyParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,13 +128,13 @@ public class MaintenanceDialogFragment extends DialogFragment {
             value = value.add(tx.getValueSentFromMe(wallet));
             fee = fee.add(tx.getFee());
         }
-        final TextView messageView = (TextView) view.findViewById(R.id.maintenance_dialog_message);
+        final TextView messageView = view.findViewById(R.id.maintenance_dialog_message);
         final MonetaryFormat format = application.getConfiguration().getFormat();
         messageView.setText(getString(R.string.maintenance_dialog_message, format.format(value), format.format(fee)));
 
         passwordGroup = view.findViewById(R.id.maintenance_dialog_password_group);
 
-        passwordView = (EditText) view.findViewById(R.id.maintenance_dialog_password);
+        passwordView = view.findViewById(R.id.maintenance_dialog_password);
         passwordView.setText(null);
 
         badPasswordView = view.findViewById(R.id.maintenance_dialog_bad_password);
@@ -231,7 +231,7 @@ public class MaintenanceDialogFragment extends DialogFragment {
         backgroundHandler.post(new Runnable() {
             @Override
             public void run() {
-                org.bitcoinj.core.Context.propagate(Constants.CONTEXT);
+                org.mincoinj.core.Context.propagate(Constants.CONTEXT);
 
                 try {
                     wallet.doMaintenance(encryptionKey, true);

@@ -17,9 +17,9 @@
 
 package de.schildbach.wallet.ui;
 
-import org.bitcoinj.crypto.KeyCrypterException;
-import org.bitcoinj.crypto.KeyCrypterScrypt;
-import org.bitcoinj.wallet.Wallet;
+import org.mincoinj.crypto.KeyCrypterException;
+import org.mincoinj.crypto.KeyCrypterScrypt;
+import org.mincoinj.wallet.Wallet;
 import org.bouncycastle.crypto.params.KeyParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -133,17 +133,17 @@ public class EncryptKeysDialogFragment extends DialogFragment {
 
         oldPasswordGroup = view.findViewById(R.id.encrypt_keys_dialog_password_old_group);
 
-        oldPasswordView = (EditText) view.findViewById(R.id.encrypt_keys_dialog_password_old);
+        oldPasswordView = view.findViewById(R.id.encrypt_keys_dialog_password_old);
         oldPasswordView.setText(null);
 
-        newPasswordView = (EditText) view.findViewById(R.id.encrypt_keys_dialog_password_new);
+        newPasswordView = view.findViewById(R.id.encrypt_keys_dialog_password_new);
         newPasswordView.setText(null);
 
         badPasswordView = view.findViewById(R.id.encrypt_keys_dialog_bad_password);
 
-        passwordStrengthView = (TextView) view.findViewById(R.id.encrypt_keys_dialog_password_strength);
+        passwordStrengthView = view.findViewById(R.id.encrypt_keys_dialog_password_strength);
 
-        showView = (CheckBox) view.findViewById(R.id.encrypt_keys_dialog_show);
+        showView = view.findViewById(R.id.encrypt_keys_dialog_show);
 
         final DialogBuilder builder = new DialogBuilder(activity);
         builder.setTitle(R.string.encrypt_keys_dialog_title);
@@ -180,7 +180,7 @@ public class EncryptKeysDialogFragment extends DialogFragment {
                 oldPasswordView.addTextChangedListener(textWatcher);
                 newPasswordView.addTextChangedListener(textWatcher);
 
-                showView = (CheckBox) dialog.findViewById(R.id.encrypt_keys_dialog_show);
+                showView = dialog.findViewById(R.id.encrypt_keys_dialog_show);
                 showView.setOnCheckedChangeListener(new ShowPasswordCheckListener(newPasswordView, oldPasswordView));
                 showView.setChecked(true);
 

@@ -22,10 +22,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.bitcoinj.core.Sha256Hash;
-import org.bitcoinj.core.StoredBlock;
-import org.bitcoinj.core.Transaction;
-import org.bitcoinj.wallet.Wallet;
+import org.mincoinj.core.Sha256Hash;
+import org.mincoinj.core.StoredBlock;
+import org.mincoinj.core.Transaction;
+import org.mincoinj.wallet.Wallet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -117,9 +117,9 @@ public final class BlockListFragment extends Fragment implements BlockListAdapte
             final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.block_list_fragment, container, false);
 
-        viewGroup = (ViewAnimator) view.findViewById(R.id.block_list_group);
+        viewGroup = view.findViewById(R.id.block_list_group);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.block_list);
+        recyclerView = view.findViewById(R.id.block_list);
         recyclerView.setLayoutManager(new StickToTopLinearLayoutManager(activity));
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));

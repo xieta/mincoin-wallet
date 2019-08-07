@@ -25,14 +25,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import org.bitcoinj.core.Address;
-import org.bitcoinj.core.Coin;
-import org.bitcoinj.core.Sha256Hash;
-import org.bitcoinj.core.StoredBlock;
-import org.bitcoinj.core.Transaction;
-import org.bitcoinj.core.Transaction.Purpose;
-import org.bitcoinj.utils.MonetaryFormat;
-import org.bitcoinj.wallet.Wallet;
+import org.mincoinj.core.Address;
+import org.mincoinj.core.Coin;
+import org.mincoinj.core.Sha256Hash;
+import org.mincoinj.core.StoredBlock;
+import org.mincoinj.core.Transaction;
+import org.mincoinj.core.Transaction.Purpose;
+import org.mincoinj.utils.MonetaryFormat;
+import org.mincoinj.wallet.Wallet;
 
 import de.schildbach.wallet.Constants;
 import de.schildbach.wallet.R;
@@ -166,9 +166,7 @@ public class BlockListAdapter extends ListAdapter<BlockListAdapter.ListItem, Blo
 
             @Override
             public boolean areContentsTheSame(final ListItem oldItem, final ListItem newItem) {
-                if (!Objects.equals(oldItem.time, newItem.time))
-                    return false;
-                return true;
+                return Objects.equals(oldItem.time, newItem.time);
             }
         });
 
@@ -222,16 +220,16 @@ public class BlockListAdapter extends ListAdapter<BlockListAdapter.ListItem, Blo
 
     private void bindTransactionView(final View row, final MonetaryFormat format, final ListItem.ListTransaction tx) {
         // receiving or sending
-        final TextView rowFromTo = (TextView) row.findViewById(R.id.block_row_transaction_fromto);
+        final TextView rowFromTo = row.findViewById(R.id.block_row_transaction_fromto);
         rowFromTo.setText(tx.fromTo);
 
         // address
-        final TextView rowAddress = (TextView) row.findViewById(R.id.block_row_transaction_address);
+        final TextView rowAddress = row.findViewById(R.id.block_row_transaction_address);
         rowAddress.setText(tx.label != null ? tx.label : tx.address.toString());
         rowAddress.setTypeface(tx.label != null ? Typeface.DEFAULT : Typeface.MONOSPACE);
 
         // value
-        final CurrencyTextView rowValue = (CurrencyTextView) row.findViewById(R.id.block_row_transaction_value);
+        final CurrencyTextView rowValue = row.findViewById(R.id.block_row_transaction_value);
         rowValue.setAlwaysSigned(true);
         rowValue.setFormat(format);
         rowValue.setAmount(tx.value);
@@ -252,13 +250,13 @@ public class BlockListAdapter extends ListAdapter<BlockListAdapter.ListItem, Blo
 
         private ViewHolder(final View itemView) {
             super(itemView);
-            transactionsViewGroup = (ViewGroup) itemView.findViewById(R.id.block_list_row_transactions_group);
+            transactionsViewGroup = itemView.findViewById(R.id.block_list_row_transactions_group);
             miningRewardAdjustmentView = itemView.findViewById(R.id.block_list_row_mining_reward_adjustment);
             miningDifficultyAdjustmentView = itemView.findViewById(R.id.block_list_row_mining_difficulty_adjustment);
-            heightView = (TextView) itemView.findViewById(R.id.block_list_row_height);
-            timeView = (TextView) itemView.findViewById(R.id.block_list_row_time);
-            hashView = (TextView) itemView.findViewById(R.id.block_list_row_hash);
-            menuView = (ImageButton) itemView.findViewById(R.id.block_list_row_menu);
+            heightView = itemView.findViewById(R.id.block_list_row_height);
+            timeView = itemView.findViewById(R.id.block_list_row_time);
+            hashView = itemView.findViewById(R.id.block_list_row_hash);
+            menuView = itemView.findViewById(R.id.block_list_row_menu);
         }
     }
 }

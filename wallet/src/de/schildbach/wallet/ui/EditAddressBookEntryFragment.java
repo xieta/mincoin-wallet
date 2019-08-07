@@ -17,8 +17,8 @@
 
 package de.schildbach.wallet.ui;
 
-import org.bitcoinj.core.Address;
-import org.bitcoinj.wallet.Wallet;
+import org.mincoinj.core.Address;
+import org.mincoinj.wallet.Wallet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -117,11 +117,11 @@ public final class EditAddressBookEntryFragment extends DialogFragment {
 
         final View view = inflater.inflate(R.layout.edit_address_book_entry_dialog, null);
 
-        final TextView viewAddress = (TextView) view.findViewById(R.id.edit_address_book_entry_address);
+        final TextView viewAddress = view.findViewById(R.id.edit_address_book_entry_address);
         viewAddress.setText(WalletUtils.formatAddress(address, Constants.ADDRESS_FORMAT_GROUP_SIZE,
                 Constants.ADDRESS_FORMAT_LINE_SIZE));
 
-        final TextView viewLabel = (TextView) view.findViewById(R.id.edit_address_book_entry_label);
+        final TextView viewLabel = view.findViewById(R.id.edit_address_book_entry_label);
         viewLabel.setText(label != null ? label : suggestedAddressLabel);
 
         dialog.setView(view);

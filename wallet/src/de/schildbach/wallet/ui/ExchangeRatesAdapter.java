@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.bitcoinj.core.Coin;
-import org.bitcoinj.utils.Fiat;
+import org.mincoinj.core.Coin;
+import org.mincoinj.utils.Fiat;
 
 import de.schildbach.wallet.Constants;
 import de.schildbach.wallet.R;
@@ -99,9 +99,7 @@ public class ExchangeRatesAdapter extends ListAdapter<ExchangeRatesAdapter.ListI
                     return false;
                 if (!Objects.equals(oldItem.balanceAsFiat, newItem.balanceAsFiat))
                     return false;
-                if (!Objects.equals(oldItem.isSelected, newItem.isSelected))
-                    return false;
-                return true;
+                return Objects.equals(oldItem.isSelected, newItem.isSelected);
             }
         });
 
@@ -125,10 +123,10 @@ public class ExchangeRatesAdapter extends ListAdapter<ExchangeRatesAdapter.ListI
         holder.walletView.setFormat(Constants.LOCAL_FORMAT);
         if (listItem.balanceAsFiat != null) {
             holder.walletView.setAmount(listItem.balanceAsFiat);
-            holder.walletView.setStrikeThru(Constants.TEST);
+           // holder.walletView.setStrikeThru(Constants.TEST); /* cryptodad Jul 2019 - don't want strike through */
         } else {
             holder.walletView.setText("n/a");
-            holder.walletView.setStrikeThru(false);
+           // holder.walletView.setStrikeThru(false);
         }
 
         final OnClickListener onClickListener = this.onClickListener;
@@ -156,10 +154,10 @@ public class ExchangeRatesAdapter extends ListAdapter<ExchangeRatesAdapter.ListI
         public ViewHolder(final View itemView) {
             super(itemView);
             defaultView = itemView.findViewById(R.id.exchange_rate_row_default);
-            currencyCodeView = (TextView) itemView.findViewById(R.id.exchange_rate_row_currency_code);
-            rateView = (CurrencyTextView) itemView.findViewById(R.id.exchange_rate_row_rate);
-            walletView = (CurrencyTextView) itemView.findViewById(R.id.exchange_rate_row_balance);
-            menuView = (ImageButton) itemView.findViewById(R.id.exchange_rate_row_menu);
+            currencyCodeView = itemView.findViewById(R.id.exchange_rate_row_currency_code);
+            rateView = itemView.findViewById(R.id.exchange_rate_row_rate);
+            walletView = itemView.findViewById(R.id.exchange_rate_row_balance);
+            menuView = itemView.findViewById(R.id.exchange_rate_row_menu);
         }
     }
 }

@@ -17,8 +17,8 @@
 
 package de.schildbach.wallet.ui;
 
-import org.bitcoinj.core.Coin;
-import org.bitcoinj.utils.Fiat;
+import org.mincoinj.core.Coin;
+import org.mincoinj.utils.Fiat;
 
 import de.schildbach.wallet.Configuration;
 import de.schildbach.wallet.Constants;
@@ -132,16 +132,16 @@ public final class WalletBalanceFragment extends Fragment {
             viewBalance.setEnabled(false);
         }
 
-        viewBalanceBtc = (CurrencyTextView) view.findViewById(R.id.wallet_balance_btc);
+        viewBalanceBtc = view.findViewById(R.id.wallet_balance_btc);
         viewBalanceBtc.setPrefixScaleX(0.9f);
 
-        viewBalanceWarning = (TextView) view.findViewById(R.id.wallet_balance_warning);
+        viewBalanceWarning = view.findViewById(R.id.wallet_balance_warning);
 
-        viewBalanceLocal = (CurrencyTextView) view.findViewById(R.id.wallet_balance_local);
-        viewBalanceLocal.setInsignificantRelativeSize(1);
-        viewBalanceLocal.setStrikeThru(Constants.TEST);
+        viewBalanceLocal = view.findViewById(R.id.wallet_balance_local);
+        //viewBalanceLocal.setInsignificantRelativeSize(1); /* cryptodad Jul 2019 */
+        //viewBalanceLocal.setStrikeThru(Constants.TEST); /* cryptodad Jul 2019 */
 
-        viewProgress = (TextView) view.findViewById(R.id.wallet_balance_progress);
+        viewProgress = view.findViewById(R.id.wallet_balance_progress);
     }
 
     @Override
@@ -226,7 +226,8 @@ public final class WalletBalanceFragment extends Fragment {
                         viewBalanceLocal.setFormat(Constants.LOCAL_FORMAT.code(0,
                                 Constants.PREFIX_ALMOST_EQUAL_TO + exchangeRate.getCurrencyCode()));
                         viewBalanceLocal.setAmount(localValue);
-                        viewBalanceLocal.setTextColor(ContextCompat.getColor(activity, R.color.fg_less_significant));
+                        //viewBalanceLocal.setTextColor(ContextCompat.getColor(activity, R.color.fg_less_significant));
+                        viewBalanceLocal.setTextColor(ContextCompat.getColor(activity, R.color.currency_value)); /* cryptodad Jul 2019 - changed text colour */
                     } else {
                         viewBalanceLocal.setVisibility(View.INVISIBLE);
                     }

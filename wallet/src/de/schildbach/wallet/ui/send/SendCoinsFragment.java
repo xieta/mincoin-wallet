@@ -26,23 +26,23 @@ import java.util.List;
 import java.util.Map;
 
 import org.bitcoin.protocols.payments.Protos.Payment;
-import org.bitcoinj.core.Address;
-import org.bitcoinj.core.AddressFormatException;
-import org.bitcoinj.core.Coin;
-import org.bitcoinj.core.InsufficientMoneyException;
-import org.bitcoinj.core.PrefixedChecksummedBytes;
-import org.bitcoinj.core.Transaction;
-import org.bitcoinj.core.TransactionConfidence;
-import org.bitcoinj.core.TransactionConfidence.ConfidenceType;
-import org.bitcoinj.core.VerificationException;
-import org.bitcoinj.protocols.payments.PaymentProtocol;
-import org.bitcoinj.utils.MonetaryFormat;
-import org.bitcoinj.wallet.KeyChain.KeyPurpose;
-import org.bitcoinj.wallet.SendRequest;
-import org.bitcoinj.wallet.Wallet;
-import org.bitcoinj.wallet.Wallet.BalanceType;
-import org.bitcoinj.wallet.Wallet.CouldNotAdjustDownwards;
-import org.bitcoinj.wallet.Wallet.DustySendRequested;
+import org.mincoinj.core.Address;
+import org.mincoinj.core.AddressFormatException;
+import org.mincoinj.core.Coin;
+import org.mincoinj.core.InsufficientMoneyException;
+import org.mincoinj.core.PrefixedChecksummedBytes;
+import org.mincoinj.core.Transaction;
+import org.mincoinj.core.TransactionConfidence;
+import org.mincoinj.core.TransactionConfidence.ConfidenceType;
+import org.mincoinj.core.VerificationException;
+import org.mincoinj.protocols.payments.PaymentProtocol;
+import org.mincoinj.utils.MonetaryFormat;
+import org.mincoinj.wallet.KeyChain.KeyPurpose;
+import org.mincoinj.wallet.SendRequest;
+import org.mincoinj.wallet.Wallet;
+import org.mincoinj.wallet.Wallet.BalanceType;
+import org.mincoinj.wallet.Wallet.CouldNotAdjustDownwards;
+import org.mincoinj.wallet.Wallet.DustySendRequested;
 import org.bouncycastle.crypto.params.KeyParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -172,6 +172,7 @@ public final class SendCoinsFragment extends Fragment {
 
     private final class ReceivingAddressListener
             implements OnFocusChangeListener, TextWatcher, AdapterView.OnItemClickListener {
+            //implements OnFocusChangeListener, TextWatcher, AdapterView.OnItemSelectedListener { // doesn't work
         @Override
         public void onFocusChange(final View v, final boolean hasFocus) {
             if (!hasFocus) {
@@ -199,6 +200,8 @@ public final class SendCoinsFragment extends Fragment {
 
         @Override
         public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+        //public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) { // doesn't work
+
             final AddressBookEntry entry = receivingAddressViewAdapter.getItem(position);
             try {
                 viewModel.validatedAddress = new AddressAndLabel(Constants.NETWORK_PARAMETERS, entry.getAddress(),
@@ -209,6 +212,10 @@ public final class SendCoinsFragment extends Fragment {
                 // swallow
             }
         }
+
+        //@Override
+        //public void onNothingSelected(final AdapterView<?> parent) { // doesn't work
+        //}
     }
 
     private final ReceivingAddressListener receivingAddressListener = new ReceivingAddressListener();
@@ -420,7 +427,7 @@ public final class SendCoinsFragment extends Fragment {
             final String mimeType = intent.getType();
 
             if ((Intent.ACTION_VIEW.equals(action) || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action))
-                    && intentUri != null && "bitcoin".equals(scheme)) {
+                    && intentUri != null && "mincoin".equals(scheme)) {
                 initStateFromBitcoinUri(intentUri);
             } else if ((NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action))
                     && PaymentProtocol.MIMETYPE_PAYMENTREQUEST.equals(mimeType)) {
@@ -454,34 +461,35 @@ public final class SendCoinsFragment extends Fragment {
 
         payeeGroup = view.findViewById(R.id.send_coins_payee_group);
 
-        payeeNameView = (TextView) view.findViewById(R.id.send_coins_payee_name);
-        payeeVerifiedByView = (TextView) view.findViewById(R.id.send_coins_payee_verified_by);
+        payeeNameView = view.findViewById(R.id.send_coins_payee_name);
+        payeeVerifiedByView = view.findViewById(R.id.send_coins_payee_verified_by);
 
-        receivingAddressView = (AutoCompleteTextView) view.findViewById(R.id.send_coins_receiving_address);
+        receivingAddressView = view.findViewById(R.id.send_coins_receiving_address);
         receivingAddressViewAdapter = new ReceivingAddressViewAdapter(activity);
         receivingAddressView.setAdapter(receivingAddressViewAdapter);
         receivingAddressView.setOnFocusChangeListener(receivingAddressListener);
         receivingAddressView.addTextChangedListener(receivingAddressListener);
         receivingAddressView.setOnItemClickListener(receivingAddressListener);
+        //receivingAddressView.setOnItemSelectedListener(receivingAddressListener); // doesn't work
 
         receivingStaticView = view.findViewById(R.id.send_coins_receiving_static);
-        receivingStaticAddressView = (TextView) view.findViewById(R.id.send_coins_receiving_static_address);
-        receivingStaticLabelView = (TextView) view.findViewById(R.id.send_coins_receiving_static_label);
+        receivingStaticAddressView = view.findViewById(R.id.send_coins_receiving_static_address);
+        receivingStaticLabelView = view.findViewById(R.id.send_coins_receiving_static_label);
 
         amountGroup = view.findViewById(R.id.send_coins_amount_group);
 
-        final CurrencyAmountView btcAmountView = (CurrencyAmountView) view.findViewById(R.id.send_coins_amount_btc);
+        final CurrencyAmountView btcAmountView = view.findViewById(R.id.send_coins_amount_btc);
         btcAmountView.setCurrencySymbol(config.getFormat().code());
         btcAmountView.setInputFormat(config.getMaxPrecisionFormat());
         btcAmountView.setHintFormat(config.getFormat());
 
-        final CurrencyAmountView localAmountView = (CurrencyAmountView) view.findViewById(R.id.send_coins_amount_local);
+        final CurrencyAmountView localAmountView = view.findViewById(R.id.send_coins_amount_local);
         localAmountView.setInputFormat(Constants.LOCAL_FORMAT);
         localAmountView.setHintFormat(Constants.LOCAL_FORMAT);
         amountCalculatorLink = new CurrencyCalculatorLink(btcAmountView, localAmountView);
         amountCalculatorLink.setExchangeDirection(config.getLastExchangeDirection());
 
-        directPaymentEnableView = (CheckBox) view.findViewById(R.id.send_coins_direct_payment_enable);
+        directPaymentEnableView = view.findViewById(R.id.send_coins_direct_payment_enable);
         directPaymentEnableView.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
@@ -493,9 +501,9 @@ public final class SendCoinsFragment extends Fragment {
             }
         });
 
-        hintView = (TextView) view.findViewById(R.id.send_coins_hint);
+        hintView = view.findViewById(R.id.send_coins_hint);
 
-        directPaymentMessageView = (TextView) view.findViewById(R.id.send_coins_direct_payment_message);
+        directPaymentMessageView = view.findViewById(R.id.send_coins_direct_payment_message);
 
         sentTransactionViewGroup = (FrameLayout) view.findViewById(R.id.transaction_row);
         sentTransactionViewGroup
@@ -503,10 +511,10 @@ public final class SendCoinsFragment extends Fragment {
         sentTransactionViewHolder = new TransactionsAdapter.TransactionViewHolder(view);
 
         privateKeyPasswordViewGroup = view.findViewById(R.id.send_coins_private_key_password_group);
-        privateKeyPasswordView = (EditText) view.findViewById(R.id.send_coins_private_key_password);
+        privateKeyPasswordView = view.findViewById(R.id.send_coins_private_key_password);
         privateKeyBadPasswordView = view.findViewById(R.id.send_coins_private_key_bad_password);
 
-        viewGo = (Button) view.findViewById(R.id.send_coins_go);
+        viewGo = view.findViewById(R.id.send_coins_go);
         viewGo.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -521,7 +529,7 @@ public final class SendCoinsFragment extends Fragment {
             }
         });
 
-        viewCancel = (Button) view.findViewById(R.id.send_coins_cancel);
+        viewCancel = view.findViewById(R.id.send_coins_cancel);
         viewCancel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -701,10 +709,8 @@ public final class SendCoinsFragment extends Fragment {
         if (viewModel.paymentIntent.hasOutputs())
             return true;
 
-        if (viewModel.validatedAddress != null)
-            return true;
+        return viewModel.validatedAddress != null;
 
-        return false;
     }
 
     private boolean isAmountPlausible() {
@@ -819,7 +825,7 @@ public final class SendCoinsFragment extends Fragment {
                 final Address refundAddress = viewModel.paymentIntent.standard == Standard.BIP70
                         ? wallet.freshAddress(KeyPurpose.REFUND) : null;
                 final Payment payment = PaymentProtocol.createPaymentMessage(
-                        Arrays.asList(new Transaction[] { viewModel.sentTransaction }), finalAmount, refundAddress,
+                        Arrays.asList(viewModel.sentTransaction), finalAmount, refundAddress,
                         null, viewModel.paymentIntent.payeeData);
 
                 if (directPaymentEnableView.isChecked())
@@ -1117,16 +1123,19 @@ public final class SendCoinsFragment extends Fragment {
                     hintView.setVisibility(View.VISIBLE);
                     final int hintResId;
                     final int colorResId;
+                    /* cryptodad Jul 2019 - one colour for text */
+                    colorResId = R.color.fg_white;
                     if (viewModel.feeCategory == FeeCategory.ECONOMIC) {
                         hintResId = R.string.send_coins_fragment_hint_fee_economic;
-                        colorResId = R.color.fg_less_significant;
+                        //colorResId = R.color.fg_less_significant;
                     } else if (viewModel.feeCategory == FeeCategory.PRIORITY) {
                         hintResId = R.string.send_coins_fragment_hint_fee_priority;
-                        colorResId = R.color.fg_less_significant;
+                        //colorResId = R.color.fg_less_significant;
                     } else {
                         hintResId = R.string.send_coins_fragment_hint_fee;
-                        colorResId = R.color.fg_insignificant;
+                        //colorResId = R.color.fg_insignificant;
                     }
+
                     hintView.setTextColor(ContextCompat.getColor(activity, colorResId));
                     hintView.setText(getString(hintResId, btcFormat.format(viewModel.dryrunTransaction.getFee())));
                 } else if (viewModel.paymentIntent.mayEditAddress() && viewModel.validatedAddress != null

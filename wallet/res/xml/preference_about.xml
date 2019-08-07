@@ -5,7 +5,7 @@
         android:key="about_version"
         android:title="@string/about_version_title" />
     <Preference
-        android:summary="© 2011-2019, the Bitcoin Wallet developers"
+        android:summary="© 2011-2019, the Mincoin Wallet developers"
         android:title="@string/about_copyright_title" />
     <Preference
         android:key="about_license"
@@ -17,38 +17,19 @@
     </Preference>
     <Preference
         android:key="about_source"
-        android:summary="https://github.com/bitcoin-wallet/bitcoin-wallet"
+        android:summary="https://github.com/gotaproblem/dev-mincoin"
         android:title="@string/about_source_title" >
         <intent
             android:action="android.intent.action.VIEW"
-            android:data="https://github.com/bitcoin-wallet/bitcoin-wallet" />
-    </Preference>
-    <Preference
-        android:enabled="false"
-        android:key="about_market_app"
-        android:summary="@string/about_market_app_summary"
-        android:title="@string/about_market_app_title" />
-    <Preference
-        android:key="about_faq"
-        android:summary="@string/about_faq_summary"
-        android:title="@string/about_faq_title" >
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:data="https://bitcoin.stackexchange.com/questions/tagged/bitcoin-wallet-app" />
-    </Preference>
-    <Preference
-        android:key="about_twitter"
-        android:summary="\@bitcoin_wallet"
-        android:title="Twitter" >
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:data="https://twitter.com/bitcoin_wallet" />
+            android:data="https://github.com/gotaproblem/dev-mincoin" />
     </Preference>
 
-    <PreferenceCategory android:title="@string/about_category_credits" >
+    <PreferenceCategory
+        android:textColor="#00BE4545"
+        android:title="@string/about_category_credits">
         <Preference
             android:key="about_credits_bitcoinj"
-            android:summary="https://bitcoinj.github.io" >
+            android:summary="https://bitcoinj.github.io">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://bitcoinj.github.io" />
@@ -56,7 +37,7 @@
         <Preference
             android:key="about_credits_zxing"
             android:summary="https://github.com/zxing/zxing"
-            android:title="@string/about_credits_zxing_title" >
+            android:title="@string/about_credits_zxing_title">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/zxing/zxing" />
@@ -64,7 +45,7 @@
         <Preference
             android:key="about_credits_bouncycastle"
             android:summary="https://bouncycastle.org"
-            android:title="@string/about_credits_bouncycastle_title" >
+            android:title="@string/about_credits_bouncycastle_title">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://bouncycastle.org" />
@@ -72,7 +53,7 @@
         <Preference
             android:key="about_credits_scrypt"
             android:summary="https://github.com/wg/scrypt"
-            android:title="@string/about_credits_scrypt_title" >
+            android:title="@string/about_credits_scrypt_title">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/wg/scrypt" />
@@ -80,7 +61,7 @@
         <Preference
             android:key="about_credits_okhttp"
             android:summary="https://github.com/square/okhttp"
-            android:title="@string/about_credits_okhttp_title" >
+            android:title="@string/about_credits_okhttp_title">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/square/okhttp" />
@@ -88,7 +69,7 @@
         <Preference
             android:key="about_credits_moshi"
             android:summary="https://github.com/square/moshi"
-            android:title="@string/about_credits_moshi_title" >
+            android:title="@string/about_credits_moshi_title">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/square/moshi" />
@@ -96,7 +77,7 @@
         <Preference
             android:key="about_credits_guava"
             android:summary="https://github.com/google/guava"
-            android:title="@string/about_credits_guava_title" >
+            android:title="@string/about_credits_guava_title">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/google/guava" />
@@ -104,7 +85,7 @@
         <Preference
             android:key="about_credits_slf4j"
             android:summary="https://github.com/qos-ch/slf4j"
-            android:title="@string/about_credits_slf4j_title" >
+            android:title="@string/about_credits_slf4j_title">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/qos-ch/slf4j" />

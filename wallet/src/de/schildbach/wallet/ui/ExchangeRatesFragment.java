@@ -17,7 +17,7 @@
 
 package de.schildbach.wallet.ui;
 
-import org.bitcoinj.core.Coin;
+import org.mincoinj.core.Coin;
 
 import com.google.common.base.Strings;
 
@@ -105,13 +105,15 @@ public final class ExchangeRatesFragment extends Fragment
                                 }
                             }
                         }
-
+                        /* cryptodad Jul 2019 - don't write exchange source */
+                        /*
                         if (activity instanceof ExchangeRatesActivity) {
                             cursor.moveToPosition(0);
                             final String source = ExchangeRatesProvider.getExchangeRate(cursor).source;
                             activity.getActionBar().setSubtitle(
                                     source != null ? getString(R.string.exchange_rates_fragment_source, source) : null);
                         }
+                        */
                     }
                 }
             });
@@ -138,8 +140,8 @@ public final class ExchangeRatesFragment extends Fragment
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.exchange_rates_fragment, container, false);
-        viewGroup = (ViewAnimator) view.findViewById(R.id.exchange_rates_list_group);
-        recyclerView = (RecyclerView) view.findViewById(R.id.exchange_rates_list);
+        viewGroup = view.findViewById(R.id.exchange_rates_list_group);
+        recyclerView = view.findViewById(R.id.exchange_rates_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));

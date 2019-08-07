@@ -17,7 +17,7 @@
 
 package de.schildbach.wallet.ui;
 
-import org.bitcoinj.core.Address;
+import org.mincoinj.core.Address;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -106,9 +106,9 @@ public final class WalletAddressFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.wallet_address_fragment, container, false);
-        currentAddressQrView = (ImageView) view.findViewById(R.id.bitcoin_address_qr);
+        currentAddressQrView = view.findViewById(R.id.bitcoin_address_qr);
 
-        currentAddressQrCardView = (CardView) view.findViewById(R.id.bitcoin_address_qr_card);
+        currentAddressQrCardView = view.findViewById(R.id.bitcoin_address_qr_card);
         currentAddressQrCardView.setCardBackgroundColor(Color.WHITE);
         currentAddressQrCardView.setPreventCornerOverlap(false);
         currentAddressQrCardView.setUseCompatPadding(false);

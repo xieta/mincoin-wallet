@@ -26,8 +26,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-import org.bitcoinj.core.Coin;
-import org.bitcoinj.wallet.Wallet;
+import org.mincoinj.core.Coin;
+import org.mincoinj.wallet.Wallet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -115,8 +115,8 @@ public class RestoreWalletFromExternalDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         final View view = LayoutInflater.from(activity).inflate(R.layout.restore_wallet_from_external_dialog, null);
-        passwordView = (EditText) view.findViewById(R.id.import_keys_from_content_dialog_password);
-        showView = (CheckBox) view.findViewById(R.id.import_keys_from_content_dialog_show);
+        passwordView = view.findViewById(R.id.import_keys_from_content_dialog_password);
+        showView = view.findViewById(R.id.import_keys_from_content_dialog_show);
         replaceWarningView = view.findViewById(R.id.restore_wallet_from_content_dialog_replace_warning);
 
         final DialogBuilder builder = new DialogBuilder(activity);

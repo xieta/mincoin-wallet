@@ -144,12 +144,12 @@ public class AlertDialogsFragment extends Fragment {
     private void process() {
         final PackageInfo packageInfo = application.packageInfo();
         final HttpUrl.Builder url = Constants.VERSION_URL.newBuilder();
-        url.addEncodedQueryParameter("package", packageInfo.packageName);
-        final String installerPackageName = Installer.installerPackageName(application);
-        if (installerPackageName != null)
-            url.addEncodedQueryParameter("installer", installerPackageName);
-        url.addQueryParameter("sdk", Integer.toString(Build.VERSION.SDK_INT));
-        url.addQueryParameter("current", Integer.toString(packageInfo.versionCode));
+        //url.addEncodedQueryParameter("package", packageInfo.packageName);
+        //final String installerPackageName = Installer.installerPackageName(application);
+        //if (installerPackageName != null)
+        //    url.addEncodedQueryParameter("installer", installerPackageName);
+        //url.addQueryParameter("sdk", Integer.toString(Build.VERSION.SDK_INT));
+        //url.addQueryParameter("current", Integer.toString(packageInfo.versionCode));
         final HttpUrl versionUrl = url.build();
 
         AsyncTask.execute(new Runnable() {
@@ -294,7 +294,10 @@ public class AlertDialogsFragment extends Fragment {
     }
 
     private Dialog createVersionAlertDialog() {
-        final Installer installer = this.installer != null ? this.installer : Installer.F_DROID;
+        /* cryptodad Jul 2019 - comment out for crash */
+        //final Installer installer = this.installer != null ? this.installer : Installer.F_DROID;
+        final Installer installer = this.installer;
+
         final Intent marketIntent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse(installer.appStorePageFor(application).toString()));
         final Intent binaryIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.BINARY_URL));

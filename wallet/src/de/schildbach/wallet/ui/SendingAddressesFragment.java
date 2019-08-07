@@ -20,13 +20,13 @@ package de.schildbach.wallet.ui;
 import java.util.List;
 import java.util.Set;
 
-import org.bitcoinj.core.Address;
-import org.bitcoinj.core.AddressFormatException;
-import org.bitcoinj.core.Transaction;
-import org.bitcoinj.core.VerificationException;
-import org.bitcoinj.uri.BitcoinURI;
-import org.bitcoinj.uri.BitcoinURIParseException;
-import org.bitcoinj.wallet.Wallet;
+import org.mincoinj.core.Address;
+import org.mincoinj.core.AddressFormatException;
+import org.mincoinj.core.Transaction;
+import org.mincoinj.core.VerificationException;
+import org.mincoinj.uri.BitcoinURI;
+import org.mincoinj.uri.BitcoinURIParseException;
+import org.mincoinj.wallet.Wallet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -330,7 +330,7 @@ public final class SendingAddressesFragment extends FancyListFragment {
 
     private void handleCopyToClipboard(final String address) {
         viewModel.clip.setClipData(ClipData.newPlainText("Bitcoin address", address));
-        log.info("sending address copied to clipboard: {}", address.toString());
+        log.info("sending address copied to clipboard: {}", address);
         new Toast(activity).toast(R.string.wallet_address_fragment_clipboard_msg);
     }
 
